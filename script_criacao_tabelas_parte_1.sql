@@ -46,3 +46,45 @@ CREATE TABLE endereco (
     idcidade INT,
     FOREIGN KEY (idcidade) REFERENCES cidade(idcidade)
 );
+
+
+-- BRENO
+
+CREATE TABLE estado (
+    idestado INT PRIMARY KEY,
+    nome VARCHAR(100), -- Nome do estado como string
+    uf CHAR(2) -- UF deve ser duas letras
+);
+
+CREATE TABLE cidade (
+    idcidade INT PRIMARY KEY,
+    nome VARCHAR(100), -- Nome da cidade como string
+    idestado INT,
+    FOREIGN KEY (idestado) REFERENCES estado(idestado)
+);
+
+CREATE TABLE autor_livro (
+    idlivro INT,
+    idautor INT,
+    PRIMARY KEY (idlivro, idautor), -- Chave primária composta
+    FOREIGN KEY (idlivro) REFERENCES livro(idlivro),
+    FOREIGN KEY (idautor) REFERENCES autor(idautor)
+);
+
+CREATE TABLE item_venda (
+    quantidade INT,
+    idlivro INT,
+    idvenda INT,
+    PRIMARY KEY (idlivro, idvenda), -- Chave primária composta
+    FOREIGN KEY (idlivro) REFERENCES livro(idlivro),
+    FOREIGN KEY (idvenda) REFERENCES venda(idvenda)
+);
+
+CREATE TABLE cliente_end (
+    idcliente INT,
+    idendereco INT,
+    PRIMARY KEY (idcliente, idendereco), -- Chave primária composta
+    FOREIGN KEY (idcliente) REFERENCES cliente(idcliente),
+    FOREIGN KEY (idendereco) REFERENCES endereco(idendereco)
+);
+
